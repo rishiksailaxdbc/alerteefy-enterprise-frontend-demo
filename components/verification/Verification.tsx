@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react"
 import Link from "next/link"
 import { VerificationStep } from "@/components/verification/verification-step"
 import { CompanyDetailsStep } from "@/components/verification/company-details-step"
@@ -8,7 +8,6 @@ import { PaymentStep } from "@/components/verification/payment-step"
 import { CheckCircle2, ShieldCheck, Building2, CreditCard, ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { Dispatch, SetStateAction } from "react"
 
 type VerificationProps = {
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -22,42 +21,24 @@ const STEPS = [
 
 function Verification({ setOpen }: VerificationProps) {
   const [currentStep, setCurrentStep] = useState(1)
+  // 1. Create a reference for the top element
+  const topRef = useRef<HTMLDivElement>(null)
+
+  // 2. Trigger scroll whenever currentStep changes
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }, [currentStep])
 
   return (
     <div className="min-h-screen bg-[#242322]">
-      {/* Header */}
-      {/* <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <span className="text-sm font-bold text-primary-foreground">A</span>
-              </div>
-              <span className="text-lg font-bold text-foreground">Alerteefy</span>
-            </Link>
-            <span className="text-muted-foreground">|</span>
-            <span className="text-sm text-muted-foreground">Account Setup</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/subscription">
-                Manage Subscription
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </header> */}
+      {/* Header commented out... */}
 
-      <main className="mx-auto max-w-3xl px-6 py-8">
-        {/* Back Link */}
-        {/* <Button variant="ghost" size="sm" className="mb-6 text-muted-foreground" asChild>
-          <Link href="/">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Dashboard
-          </Link>
-        </Button> */}
+      <main className="mx-auto max-w-3xl px-6 py-8" ref={topRef}>
+        {/* Back Link commented out... */}
 
-        {/* Page Title */}
+        {/* 3. Attach the ref to the title container */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground text-balance">
             Account Verification & Payment
@@ -140,7 +121,7 @@ function Verification({ setOpen }: VerificationProps) {
           />
         )}
         {currentStep === 3 && (
-          <PaymentStep onBack={() => setCurrentStep(2)}  setOpen={setOpen}/>
+          <PaymentStep onBack={() => setCurrentStep(2)} setOpen={setOpen} />
         )}
       </main>
     </div>
