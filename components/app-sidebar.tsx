@@ -14,6 +14,7 @@ import {
   UserPlus,
   ChevronLeft,
   ChevronRight,
+  CreditCard,
   LogOut,
   Bell,
 } from "lucide-react"
@@ -55,6 +56,12 @@ const navItems = [
     title: "Enterprise Profile",
     href: "/dashboard/profile",
     icon: Building2,
+  },
+  {
+    title: "Subscription",
+    href: "/dashboard/subscription",
+    icon: CreditCard,
+
   },
   {
     title: "Settings",

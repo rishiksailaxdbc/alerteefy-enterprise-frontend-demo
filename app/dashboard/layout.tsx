@@ -1,10 +1,31 @@
+"use client"
+
 import { AppSidebar, TopBar } from "@/components/app-sidebar"
+import SetUp from "@/components/setUp"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const pathname = usePathname()
+
+  const [open, setOpen] = useState(false)
+  const [hasOpened, setHasOpened] = useState(false)
+
+  useEffect(() => {
+    if (
+      pathname !== "/dashboard" && // not dashboard
+      !hasOpened                  // not already opened
+    ) {
+      setOpen(true)
+      setHasOpened(true)
+    }
+  }, [pathname, hasOpened])
+
   return (
     <div className="flex h-screen overflow-hidden bg-background">
       <AppSidebar />
@@ -14,6 +35,8 @@ export default function DashboardLayout({
           {children}
         </main>
       </div>
+
+      <SetUp open={open} setOpen={setOpen} />
     </div>
   )
 }

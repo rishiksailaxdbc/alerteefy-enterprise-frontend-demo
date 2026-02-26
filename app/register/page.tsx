@@ -9,18 +9,16 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Textarea } from "@/components/ui/textarea"
+import { useRouter } from "next/navigation"
 
 const steps = [
   { title: "Account Info", description: "Basic details" },
-  { title: "Company Info", description: "Organization details" },
-  { title: "Verification", description: "Documents & licenses" },
 ]
 
 export default function RegisterPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [currentStep, setCurrentStep] = useState(0)
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -34,24 +32,11 @@ export default function RegisterPage() {
           }}
         />
         <div className="relative z-10 flex flex-col items-center px-8 text-center">
-          <div className="relative mb-6 h-20 w-20">
+          <div className="relative mb-8 h-20 w-20">
             <Image src="/logo.png" alt="Alerteefy" fill className="object-contain rounded-full" />
           </div>
           <h2 className="text-2xl font-bold text-foreground">Join Alerteefy</h2>
           <p className="mt-2 text-sm text-muted-foreground">Enterprise vehicle management platform</p>
-          <div className="mt-12 flex flex-col gap-6">
-            {steps.map((step, i) => (
-              <div key={step.title} className="flex items-center gap-3">
-                <div className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold ${i <= currentStep ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}>
-                  {i < currentStep ? <CheckCircle2 className="h-4 w-4" /> : i + 1}
-                </div>
-                <div className="text-left">
-                  <p className={`text-sm font-medium ${i <= currentStep ? "text-foreground" : "text-muted-foreground"}`}>{step.title}</p>
-                  <p className="text-xs text-muted-foreground">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -68,13 +53,9 @@ export default function RegisterPage() {
 
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-foreground">Enterprise Registration</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Step {currentStep + 1} of {steps.length}: {steps[currentStep].title}
-            </p>
           </div>
 
-          {/* Step 1: Account Info */}
-          {currentStep === 0 && (
+        
             <div className="flex flex-col gap-5">
               <div className="flex flex-col gap-2">
                 <Label className="text-sm font-medium text-foreground">Full Name (Account Admin)</Label>
@@ -131,139 +112,21 @@ export default function RegisterPage() {
                 </div>
               </div>
             </div>
-          )}
+         
 
-          {/* Step 2: Company Info */}
-          {currentStep === 1 && (
-            <div className="flex flex-col gap-5">
-              <div className="flex flex-col gap-2">
-                <Label className="text-sm font-medium text-foreground">Company Name</Label>
-                <div className="relative">
-                  <Building2 className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input placeholder="Sailax Pvt Ltd" className="h-11 bg-secondary border-border pl-10 text-foreground placeholder:text-muted-foreground" />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
-                  <Label className="text-sm font-medium text-foreground">PAN Number</Label>
-                  <div className="relative">
-                    <Hash className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input placeholder="ABCDE1234F" className="h-11 bg-secondary border-border pl-10 text-foreground placeholder:text-muted-foreground" />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label className="text-sm font-medium text-foreground">GST Number</Label>
-                  <div className="relative">
-                    <Hash className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input placeholder="22ABCDE1234F1Z5" className="h-11 bg-secondary border-border pl-10 text-foreground placeholder:text-muted-foreground" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <Label className="text-sm font-medium text-foreground">Company Address</Label>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Textarea placeholder="Full registered office address" className="min-h-[80px] bg-secondary border-border pl-10 text-foreground placeholder:text-muted-foreground" />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <Label className="text-sm font-medium text-foreground">Incorporation Certificate</Label>
-                <div className="flex items-center gap-3 rounded-lg border border-dashed border-border bg-secondary p-4">
-                  <Upload className="h-5 w-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-foreground">Upload Document</p>
-                    <p className="text-xs text-muted-foreground">PDF, JPG, PNG (max 5MB)</p>
-                  </div>
-                  <Button variant="outline" size="sm" className="ml-auto border-border text-foreground">
-                    Browse
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Step 3: Verification */}
-          {currentStep === 2 && (
-            <div className="flex flex-col gap-5">
-              <div className="flex flex-col gap-2">
-                <Label className="text-sm font-medium text-foreground">Number of Licenses</Label>
-                <div className="relative">
-                  <FileText className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                  <Input type="number" min={3} placeholder="Minimum 3 licenses" className="h-11 bg-secondary border-border pl-10 text-foreground placeholder:text-muted-foreground" />
-                </div>
-                <p className="text-xs text-muted-foreground">A minimum of 3 licenses is required for enterprise registration.</p>
-              </div>
-
-              <div className="rounded-lg border border-border bg-secondary/50 p-4">
-                <h3 className="text-sm font-semibold text-foreground">Pricing Summary</h3>
-                <div className="mt-3 flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">License (per unit)</span>
-                    <span className="text-foreground font-medium">Rs. 299/year</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Quantity</span>
-                    <span className="text-foreground font-medium">3</span>
-                  </div>
-                  <Separator className="my-1 bg-border" />
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-foreground font-semibold">Total</span>
-                    <span className="text-primary font-bold">Rs. 897</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 rounded-lg border border-border bg-secondary/50 p-4">
-                <Checkbox id="terms" className="mt-0.5 border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground" />
-                <Label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                  I agree to the{" "}
-                  <Link href="/dashboard/settings/terms" className="text-primary hover:underline">Terms & Conditions</Link>
-                  {" "}and{" "}
-                  <Link href="/dashboard/settings/privacy" className="text-primary hover:underline">Privacy Policy</Link>
-                  {" "}of Alerteefy Enterprise Platform.
-                </Label>
-              </div>
-
-              <div className="flex items-start gap-3 rounded-lg border border-border bg-secondary/50 p-4">
-                <Checkbox id="verify" className="mt-0.5 border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground" />
-                <Label htmlFor="verify" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
-                  I certify that all information provided is accurate and complete.
-                </Label>
-              </div>
-            </div>
-          )}
+        
 
           {/* Navigation */}
           <div className="mt-8 flex gap-3">
-            {currentStep > 0 && (
-              <Button
-                variant="outline"
-                className="h-11 flex-1 border-border text-foreground hover:bg-secondary"
-                onClick={() => setCurrentStep(currentStep - 1)}
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back
-              </Button>
-            )}
-            {currentStep < steps.length - 1 ? (
+           
               <Button
                 className="h-11 flex-1 bg-primary text-primary-foreground font-semibold hover:bg-primary/90 shadow-[0_0_20px_rgba(200,230,0,0.2)]"
-                onClick={() => setCurrentStep(currentStep + 1)}
+                onClick={()=> router.push("/dashboard")}
               >
-                Continue
+                Register
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            ) : (
-              <Link href="/dashboard" className="flex-1">
-                <Button className="h-11 w-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 shadow-[0_0_20px_rgba(200,230,0,0.2)]">
-                  Register & Pay
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            )}
+           
           </div>
 
           <Separator className="my-6 bg-border" />

@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import Link from "next/link"
 import { DashboardCharts } from "@/components/dashboard-charts"
+import { useState } from "react"
+import Verification from "@/components/verification/Verification";
 
 const stats = [
   {
@@ -62,7 +64,10 @@ const severityColors: Record<string, string> = {
   low: "bg-green-500/10 text-green-400 border-green-500/20",
 }
 
+
 export default function DashboardPage() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="flex flex-col gap-6">
       {/* Stats Cards */}
@@ -209,6 +214,27 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          
+          {/* Modal Content */}
+          <div className="w-[90%] h-[90%] rounded-2xl shadow-2xl relative overflow-auto">
+            
+            {/* Close Button */}
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-4 right-4  hover:text-black text-xl"
+            >
+              ✕
+            </button>
+
+            <Verification setOpen={setOpen}/>
+
+          </div>
+        </div>
+      )}
 
       {/* Notifications */}
       <Card className="border-border bg-card">
