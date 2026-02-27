@@ -97,6 +97,16 @@ export function PaymentStep({ onBack, setOpen }: PaymentStepProps) {
     setLicenseCount((prev) => Math.max(3, prev - 1))
   }, [])
 
+  const handleChange = (e: any) => {
+
+    const value = e.target.value;
+    if (/^[1-9]\d*$/.test(value) || value === "") {
+      setLicenseCount(value);
+    }
+
+
+  }
+
   return (
     <Card className="border-border/50 bg-card">
       <CardHeader>
@@ -114,7 +124,7 @@ export function PaymentStep({ onBack, setOpen }: PaymentStepProps) {
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Plan Selection */}
-        <div className="space-y-1.5">
+        {/* <div className="space-y-1.5">
           <Label className="text-sm">Subscription Plan</Label>
           <Select value={planType} onValueChange={setPlanType}>
             <SelectTrigger className="w-full bg-background/50">
@@ -128,7 +138,7 @@ export function PaymentStep({ onBack, setOpen }: PaymentStepProps) {
               </SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </div> */}
 
         {/* License Count */}
         <div className="space-y-1.5">
@@ -146,9 +156,8 @@ export function PaymentStep({ onBack, setOpen }: PaymentStepProps) {
               <Minus className="h-4 w-4" />
               <span className="sr-only">Decrease licenses</span>
             </Button>
-            <div className="flex h-10 w-20 items-center justify-center rounded-md border border-border bg-background/50 font-mono text-lg font-semibold text-foreground">
-              {licenseCount}
-            </div>
+            <input type="number" value={licenseCount} onChange={handleChange} className="flex h-10 w-25 px-2 items-center justify-center rounded-md border border-border bg-background/50 font-mono text-lg font-semibold text-foreground" />
+
             <Button
               variant="outline"
               size="icon"
@@ -275,7 +284,7 @@ export function PaymentStep({ onBack, setOpen }: PaymentStepProps) {
           </Button>
           <Button
             onClick={handleCheckout}
-            disabled={processing}
+            disabled={processing || licenseCount<3}
             className="bg-primary text-primary-foreground hover:bg-primary/90 px-8"
           >
             {processing ? (
