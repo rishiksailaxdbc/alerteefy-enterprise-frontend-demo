@@ -49,7 +49,7 @@ const helpTopics = [
   { title: "Vehicle Management", desc: "How to register, edit, and remove vehicles from your fleet.", articles: 6 },
   { title: "QR Stickers & Licenses", desc: "Managing QR stickers, assigning to vehicles, renewing licenses.", articles: 10 },
   { title: "Billing & Payments", desc: "Understanding invoices, payment history, and license pricing.", articles: 5 },
-  { title: "Park Ledger", desc: "How parking attendance works and viewing daily records.", articles: 4 },
+  { title: "Parking Ledger", desc: "How parking attendance works and viewing daily records.", articles: 4 },
   { title: "Security & Privacy", desc: "Account security, data handling, and privacy settings.", articles: 7 },
 ]
 
@@ -317,7 +317,7 @@ export default function SettingsPage() {
                           <SelectItem value="vehicles">Vehicles</SelectItem>
                           <SelectItem value="stickers">QR Stickers</SelectItem>
                           <SelectItem value="billing">Billing & Payments</SelectItem>
-                          <SelectItem value="park_ledger">Park Ledger</SelectItem>
+                          <SelectItem value="park_ledger">Parking Ledger</SelectItem>
                           <SelectItem value="general">General</SelectItem>
                         </SelectContent>
                       </Select>

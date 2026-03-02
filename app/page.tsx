@@ -147,9 +147,9 @@ export default function LoginPage() {
             height={400}
             className="mb-8 drop-shadow-2xl"
           />
-          <h3 className="text-2xl font-bold text-foreground">Smart Vehicle Alert System</h3>
+          <h3 className="text-2xl font-bold text-foreground">Smart Vehicle Alert & Fleet Safety Platform</h3>
           <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-            Manage your entire fleet with QR-based stickers, instant notifications, and real-time alert tracking from one centralized dashboard.
+            Empower every vehicle in your fleet to communicate instantly, privately, and intelligently — transforming vehicles into proactive safety assets.
           </p>
         </div>
       </div>

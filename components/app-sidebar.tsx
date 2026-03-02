@@ -43,7 +43,7 @@ const navItems = [
     icon: QrCode,
   },
   {
-    title: "Park Ledger",
+    title: "Parking Ledger",
     href: "/dashboard/park-ledger",
     icon: BookOpen,
   },

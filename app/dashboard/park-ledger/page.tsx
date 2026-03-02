@@ -87,7 +87,7 @@ export default function ParkLedgerPage() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Park Ledger</h1>
+          <h1 className="text-2xl font-bold text-foreground">Parking Ledger</h1>
           <p className="text-sm text-muted-foreground">Vehicle attendance records - View only</p>
         </div>
         <Button variant="outline" className="border-border text-foreground hover:bg-secondary">

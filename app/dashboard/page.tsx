@@ -112,7 +112,7 @@ export default function DashboardPage() {
         </Link>
         <Link href="/dashboard/park-ledger">
           <Button size="sm" variant="outline" className="border-border text-foreground hover:bg-secondary">
-            <BarChart3 className="mr-2 h-4 w-4" /> Park Ledger
+            <BarChart3 className="mr-2 h-4 w-4" /> Parking Ledger
           </Button>
         </Link>
       </div>
